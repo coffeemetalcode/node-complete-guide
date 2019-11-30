@@ -1,9 +1,21 @@
-const http = require('http');
+const express = require('express');
 
-const routes = require('./routes');
+const app = express();
 
-console.log(routes.someText);
+const PORT = process.env.PORT || 3000;
 
-const server = http.createServer(routes.handler);
+app.use('/users', (req, res, next) => {
+  res.send(`
+    <h1>Users Page</h1>
+  `);
+});
 
-server.listen(3000);
+app.use('/', (req, res, next) => {
+  res.send(`
+    <h1>Hello from Express.js!</h1>
+  `);
+});
+
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}!`);
+});
